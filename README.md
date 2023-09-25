@@ -28,8 +28,7 @@ Needl should work pretty much any Linux system with Python 3.0+ installed.
 1. `cd /opt`
 2. `git clone https://github.com/eth0izzle/needl.git`
 3. `pip3 install -r requirements.txt`
-4. Download [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/downloads) for your platform (requires Chrome) and place in ./data.
-5. `python3 needl.py`
+4. `python3 needl.py`
 
 ## Usage
 
