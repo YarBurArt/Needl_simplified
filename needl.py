@@ -1,11 +1,14 @@
 import os, sys, time, argparse, logging
-import daemon, daemon.pidfile
+try:
+    import daemon, daemon.pidfile
+except ImportError:
+    daemon = None
 import needl, needl.tasks as scheduler
 
 
 def main():
     parser = argparse.ArgumentParser(description=needl.__description__)
-    parser.add_argument('--datadir', default=os.getcwd() + '/data', help='Data directory')
+    parser.add_argument('--datadir', default=os.getcwd()+'/data', help='Data directory')
     parser.add_argument('-d', '--daemon', action='store_true', help='Run as a deamon')
     parser.add_argument('-v', '--verbose', action='store_true', help='Increase logging')
     parser.add_argument('--logfile', type=argparse.FileType('a'), default=sys.stdout, help='Log to this file. Default is stdout.')

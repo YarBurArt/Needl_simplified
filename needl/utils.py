@@ -1,6 +1,7 @@
 import os, re, time
 import urllib.parse as url
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 import needl
 
 
@@ -48,16 +49,19 @@ def url_is_absolute(link):
 
 
 def get_browser():
-    chromedriver = os.path.join(needl.args.datadir, 'chromedriver')
-    if not os.path.exists(chromedriver):
-        raise FileNotFoundError("Could not find chromedriver executable at %s. Download it for your platform at https://chromedriver.storage.googleapis.com/index.html?path=2.33/", chromedriver)
-
+    # chromedriver = os.path.join(needl.args.datadir, 'chromedriver')
+    # if not os.path.exists(chromedriver):
+    #     raise FileNotFoundError("Could not find chromedriver executable at %s. Download it for your platform at https://chromedriver.storage.googleapis.com/index.html?path=2.33/", chromedriver)
+    
+    # replace this line to your browser 
+    chromedriver = webdriver.Chrome(ChromeDriverManager().install())
+    
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('headless')
     chrome_options.add_argument('window-size=1024x3000')
     chrome_options.add_argument("user-agent=" + get_line(os.path.join(needl.args.datadir, 'user-agents.txt')))
 
-    return webdriver.Chrome(executable_path=chromedriver, chrome_options=chrome_options)
+    return webdriver.Chrome(service=chromedriver, options=chrome_options)
 
 
 def process_click_depth(browser, click_depth=None):
